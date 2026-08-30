@@ -15,27 +15,27 @@ export const Hero: React.FC = () => {
           priority
           className="object-cover object-center"
         />
-        {/* Subtle dark gradient overlay to guarantee 100% text readability */}
+        {/* Subtle dark gradient overlay */}
         <div className="absolute inset-0 bg-black/25" />
       </div>
 
-      {/* Top Header Navigation */}
-      <div className="relative z-10 w-full">
+      {/* Top Container: Header + Subheading Content */}
+      <div className="relative z-10 w-full flex flex-col">
         <Header />
-      </div>
+        
+        {/* Middle Subheading Content positioned with balanced spacing below Header */}
+        <div className="section-container flex flex-col items-start pt-10 md:pt-16 pb-6">
+          <div className="max-w-[423px] flex flex-col items-start gap-6">
+            <h6 className="heading-06 text-white leading-[1.3] tracking-[-0.01em]">
+              WE CRAFT IMPACTFUL DESIGNS FOR BRANDS THAT REFUSE TO BLEND IN A CROWDED MARKET WITH BOLD CREATIVITY.
+            </h6>
 
-      {/* Middle Content */}
-      <div className="relative z-10 section-container flex flex-col items-start gap-8 pt-[110px] pb-8">
-        <div className="max-w-[423px] flex flex-col items-start gap-6">
-          <h6 className="heading-06 text-white leading-[1.3] tracking-[-0.01em]">
-            WE CRAFT IMPACTFUL DESIGNS FOR BRANDS THAT REFUSE TO BLEND IN A CROWDED MARKET WITH BOLD CREATIVITY.
-          </h6>
-
-          <Button variant="light">Start a project</Button>
+            <Button variant="light">Start a project</Button>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Display Title & Footer Metadata */}
+      {/* Bottom Container: Giant Title & Footer Metadata */}
       <div className="relative z-10 section-container w-full flex flex-col gap-4 pb-8">
         {/* Giant Hero Title */}
         <h1 className="w-full text-white font-heading font-normal uppercase leading-none tracking-[-0.03em] text-[13vw] xl:text-[180px] select-none">
