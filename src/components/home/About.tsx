@@ -38,7 +38,7 @@ export const About: React.FC = () => {
                 <span className="text-4xl lg:text-[46px] leading-none">94</span>
                 <span className="text-lg lg:text-[22px] font-heading leading-none translate-y-1">%</span>
               </div>
-              <p className="text-xs lg:text-[13px] leading-relaxed text-white/80 font-sans">
+              <p className="paragraph-medium text-white/85">
                 Clients report higher satisfaction and retention
               </p>
             </div>
@@ -49,7 +49,7 @@ export const About: React.FC = () => {
                 <span className="text-4xl lg:text-[46px] leading-none">22</span>
                 <span className="text-lg lg:text-[22px] font-heading leading-none translate-y-1">K</span>
               </div>
-              <p className="text-xs lg:text-[13px] leading-relaxed text-[#161616]/85 font-sans">
+              <p className="paragraph-medium text-[#161616]/85">
                 Projects delivered with consistent quality
               </p>
             </div>
