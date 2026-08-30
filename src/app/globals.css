@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #2f3ae4;
-  /* --color-primary: #FF6347; */
+  --color-primary: #FF6347;
   --color-text-primary: #161616;
   --color-text-paragraph: #5B5B5B;
   --color-accent: #FFFFFF;
@@ -103,18 +102,21 @@ p, button, input, select, textarea, .paragraph-large, .paragraph-medium, .paragr
   font-size: 18px;
   line-height: 1.5;
   letter-spacing: -0.01em;
+  font-weight: 300;
 }
 
 .paragraph-medium {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
+  font-weight: 300;
 }
 
 .paragraph-small {
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.01em;
+  font-weight: 300;
 }
 
 
