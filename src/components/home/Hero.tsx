@@ -21,6 +21,7 @@ export const Hero: React.FC = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -49,6 +50,17 @@ export const Hero: React.FC = () => {
           stagger: 0.012,
           ease: "power2.out",
           delay: 0.1,
+        });
+      }
+
+      // CTA button slide in from bottom on page load
+      if (ctaRef.current) {
+        gsap.to(ctaRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.35,
         });
       }
 
@@ -161,7 +173,17 @@ export const Hero: React.FC = () => {
               ))}
             </h6>
 
-            <Button variant="light">Start a project</Button>
+            {/* Start a project CTA Button with Initial Slide-In Animation */}
+            <div
+              ref={ctaRef}
+              style={{
+                opacity: 0,
+                transform: "translateY(35px)",
+                willChange: "transform, opacity",
+              }}
+            >
+              <Button variant="light">Start a project</Button>
+            </div>
           </div>
         </div>
 

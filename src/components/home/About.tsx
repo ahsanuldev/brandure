@@ -23,14 +23,14 @@ export const About: React.FC = () => {
       gsap.fromTo(
         cards,
         {
-          x: -35,
+          x: -100,
           opacity: 0,
         },
         {
           x: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.15,
+          duration: 0.85,
+          stagger: 0.18,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,

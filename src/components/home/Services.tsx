@@ -203,6 +203,11 @@ export const Services: React.FC = () => {
       <div
         ref={cursorRef}
         className="pointer-events-none fixed top-0 left-0 z-50 w-[180px] sm:w-[200px] h-[240px] sm:h-[260px] rounded-xl overflow-hidden shadow-2xl bg-black hidden md:block"
+        style={{
+          opacity: 0,
+          transform: "translate(-50%, -50%) scale(0)",
+          willChange: "transform, opacity",
+        }}
       >
         <div className="relative w-full h-full overflow-hidden">
           {servicesData.map((service, index) => (
@@ -212,6 +217,10 @@ export const Services: React.FC = () => {
                 imageRefs.current[index] = el;
               }}
               className="absolute inset-0 w-full h-full overflow-hidden"
+              style={{
+                opacity: 0,
+                transform: "scale(1.18)",
+              }}
             >
               <Image
                 src={service.image}
