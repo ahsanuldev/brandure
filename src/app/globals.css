@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #FF6347;
+  --color-text-primary: #161616;
+  --color-text-paragraph: #5B5B5B;
+  --color-accent: #FFFFFF;
+  --color-stroke: #CCC5B6;
+  --color-bg: #FAF1DF;
+  --color-neutral: #E3DBCB;
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-paragraph: var(--color-text-paragraph);
+  --color-accent: var(--color-accent);
+  --color-stroke: var(--color-stroke);
+  --color-bg: var(--color-bg);
+  --color-neutral: var(--color-neutral);
+
+  --font-heading: var(--font-anton), sans-serif;
+  --font-sans: var(--font-inter-tight), sans-serif;
+  --font-body: var(--font-inter-tight), sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter-tight), sans-serif;
+  min-height: 100vh;
+}
+
+/* Typography styles based on Figma Style Guide */
+h1, h2, h3, h4, h5, h6,
+.heading-01, .heading-02, .heading-03, .heading-04, .heading-05, .heading-06 {
+  font-family: var(--font-anton), sans-serif;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.03em !important;
+  color: var(--color-text-primary);
+}
+
+h1, .heading-01 {
+  font-size: 64px;
+}
+
+h2, .heading-02 {
+  font-size: 52px;
+}
+
+h3, .heading-03 {
+  font-size: 40px;
+}
+
+h4, .heading-04 {
+  font-size: 32px;
+}
+
+h5, .heading-05 {
+  font-size: 24px;
+}
+
+h6, .heading-06 {
+  font-size: 20px;
+}
+
+
+/* Paragraph & Button styles (Inter Tight 150% line height, -1% letter spacing) */
+p, button, input, select, textarea, .paragraph-large, .paragraph-medium, .paragraph-small {
+  font-family: var(--font-inter-tight), sans-serif;
+}
+
+.paragraph-large {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph-medium {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph-small {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-text-paragraph);
+}
+
+
+
+
