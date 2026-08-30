@@ -48,7 +48,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Size specs matching Figma (56px container height, 48px circle, 4px right padding, 32px left padding)
     const sizeStyles = {
-      sm: "h-[44px] pl-6 pr-1 py-1 text-sm gap-3 font-normal",
+      sm: "h-[44px] pl-5 pr-1 py-1 text-[15px] gap-3 font-medium",
       md: "h-[56px] pl-8 pr-1 py-1 text-[18px] leading-[1.5] gap-4 font-normal",
       lg: "h-[64px] pl-10 pr-1.5 py-1.5 text-[20px] leading-[1.5] gap-6 font-normal",
     };

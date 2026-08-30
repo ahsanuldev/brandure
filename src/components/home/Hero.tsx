@@ -39,7 +39,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-10 section-container w-full flex flex-col gap-4 pb-8">
         {/* Giant Hero Title */}
         <h1 className="w-full text-white font-heading font-normal uppercase leading-none tracking-[-0.03em] text-[13vw] xl:text-[180px]">
-          LUNEXIS STUDIO
+          BRANDURE STUDIO
         </h1>
 
         {/* Bottom Footer Row */}
