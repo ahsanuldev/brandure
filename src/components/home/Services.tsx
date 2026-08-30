@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -48,7 +48,9 @@ const servicesData = [
 export const Services: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const prevIndexRef = useRef<number | null>(null);
+  const isCursorVisibleRef = useRef<boolean>(false);
 
   const xTo = useRef<gsap.QuickToFunc | null>(null);
   const yTo = useRef<gsap.QuickToFunc | null>(null);
@@ -90,14 +92,19 @@ export const Services: React.FC = () => {
         });
 
         xTo.current = gsap.quickTo(cursorRef.current, "x", {
-          duration: 0.45,
+          duration: 0.25,
           ease: "power3.out",
         });
         yTo.current = gsap.quickTo(cursorRef.current, "y", {
-          duration: 0.45,
+          duration: 0.25,
           ease: "power3.out",
         });
       }
+
+      // Initialize all image positions (scaled up & hidden)
+      imageRefs.current.forEach((img) => {
+        if (img) gsap.set(img, { scale: 1.18, opacity: 0 });
+      });
     },
     { scope: containerRef }
   );
@@ -109,27 +116,79 @@ export const Services: React.FC = () => {
     }
   };
 
-  const handleMouseEnterRow = (index: number) => {
-    setActiveIndex(index);
-    if (cursorRef.current) {
+  const handleMouseEnterRow = (newIndex: number) => {
+    const prevIndex = prevIndexRef.current;
+
+    // Reveal cursor container if hidden
+    if (cursorRef.current && !isCursorVisibleRef.current) {
+      isCursorVisibleRef.current = true;
       gsap.to(cursorRef.current, {
         scale: 1,
         opacity: 1,
-        duration: 0.35,
+        duration: 0.25,
         ease: "power2.out",
       });
     }
+
+    if (prevIndex === null) {
+      // First hover: set target image
+      imageRefs.current.forEach((img, i) => {
+        if (!img) return;
+        if (i === newIndex) {
+          gsap.set(img, { scale: 1, opacity: 1 });
+        } else {
+          gsap.set(img, { scale: 1.18, opacity: 0 });
+        }
+      });
+    } else if (prevIndex !== newIndex) {
+      const prevImg = imageRefs.current[prevIndex];
+      const newImg = imageRefs.current[newIndex];
+
+      if (prevImg) gsap.killTweensOf(prevImg);
+      if (newImg) gsap.killTweensOf(newImg);
+
+      // Previous image shrinks slightly and fades out
+      if (prevImg) {
+        gsap.to(prevImg, {
+          scale: 0.92,
+          opacity: 0,
+          duration: 0.35,
+          ease: "power2.out",
+        });
+      }
+
+      // New image zooms out into frame (1.18 -> 1.0) while fading in
+      if (newImg) {
+        gsap.fromTo(
+          newImg,
+          { scale: 1.18, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.35,
+            ease: "power2.out",
+          }
+        );
+      }
+    }
+
+    prevIndexRef.current = newIndex;
   };
 
-  const handleMouseLeaveRow = () => {
-    setActiveIndex(null);
+  const handleMouseLeaveList = () => {
+    isCursorVisibleRef.current = false;
     if (cursorRef.current) {
       gsap.to(cursorRef.current, {
         scale: 0,
         opacity: 0,
         duration: 0.3,
         ease: "power2.in",
+        onComplete: () => {
+          prevIndexRef.current = null;
+        },
       });
+    } else {
+      prevIndexRef.current = null;
     }
   };
 
@@ -138,23 +197,21 @@ export const Services: React.FC = () => {
       id="services"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeaveRow}
       className="relative z-20 w-full bg-[#FAF1DF] py-16 md:py-24 lg:py-32 border-t border-[#161616]/10 cursor-default"
     >
       {/* Floating Image Cursor Follower */}
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed top-0 left-0 z-50 w-[180px] sm:w-[200px] h-[240px] sm:h-[260px] rounded-xl overflow-hidden shadow-2xl bg-black border border-white/10 hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-50 w-[180px] sm:w-[200px] h-[240px] sm:h-[260px] rounded-xl overflow-hidden shadow-2xl bg-black hidden md:block"
       >
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full overflow-hidden">
           {servicesData.map((service, index) => (
             <div
               key={service.number}
-              className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out ${
-                activeIndex === index
-                  ? "opacity-100 scale-100 z-10"
-                  : "opacity-0 scale-105 z-0"
-              }`}
+              ref={(el) => {
+                imageRefs.current[index] = el;
+              }}
+              className="absolute inset-0 w-full h-full overflow-hidden"
             >
               <Image
                 src={service.image}
@@ -180,12 +237,14 @@ export const Services: React.FC = () => {
         </div>
 
         {/* Services List Placed Below WHAT WE DO with Divider Lines Aligned */}
-        <div className="w-full md:w-[78%] lg:w-[85%] md:ml-auto flex flex-col border-b border-[#161616]/15">
+        <div
+          onMouseLeave={handleMouseLeaveList}
+          className="w-full md:w-[78%] lg:w-[85%] md:ml-auto flex flex-col border-b border-[#161616]/15"
+        >
           {servicesData.map((service, index) => (
             <div
               key={service.number}
               onMouseEnter={() => handleMouseEnterRow(index)}
-              onMouseLeave={handleMouseLeaveRow}
               className="service-row border-t border-[#161616]/15 py-8 lg:py-10 flex flex-col md:flex-row items-start md:items-start justify-between gap-6 md:gap-8 group cursor-pointer"
             >
               {/* Left Number */}
