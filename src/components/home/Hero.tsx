@@ -7,16 +7,16 @@ export const Hero: React.FC = () => {
   return (
     <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#0d0e10] text-white">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute w-full h-full z-0 bg-red-500">
         <Image
           src="/hero-bg.jpg"
           alt="Hero background"
           fill
           priority
-          className="object-cover object-center"
+          className="h-full  w-full object-cover object-top "
         />
         {/* Subtle dark gradient overlay */}
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-black/45" />
       </div>
 
       {/* Top Container: Header + Subheading Content */}
@@ -38,12 +38,12 @@ export const Hero: React.FC = () => {
       {/* Bottom Container: Giant Title & Footer Metadata */}
       <div className="relative z-10 section-container w-full flex flex-col gap-4 pb-8">
         {/* Giant Hero Title */}
-        <h1 className="w-full text-white font-heading font-normal uppercase leading-none tracking-[-0.03em] text-[13vw] xl:text-[180px] select-none">
+        <h1 className="w-full text-white font-heading font-normal uppercase leading-none tracking-[-0.03em] text-[13vw] xl:text-[180px]">
           LUNEXIS STUDIO
         </h1>
 
         {/* Bottom Footer Row */}
-        <div className="w-full flex items-center justify-between text-sm font-sans text-white/90 pt-3 border-t border-white/15">
+        <div className="w-full flex items-center justify-between paragraph-large">
           <span>© 2026 Luxfolio. All Rights Reserved.</span>
           <span>(Scroll down)</span>
         </div>

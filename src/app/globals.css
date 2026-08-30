@@ -102,21 +102,18 @@ p, button, input, select, textarea, .paragraph-large, .paragraph-medium, .paragr
   font-size: 18px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  color: var(--color-text-paragraph);
 }
 
 .paragraph-medium {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  color: var(--color-text-paragraph);
 }
 
 .paragraph-small {
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  color: var(--color-text-paragraph);
 }
 
 
