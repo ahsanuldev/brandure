@@ -105,10 +105,11 @@ export const Works: React.FC = () => {
           <div className="w-full flex items-center justify-center">
             {/* Layered container holding Center Image behind and WO + RK on top */}
             <div className="relative w-full flex items-center justify-center min-h-[450px] lg:min-h-[560px]">
-              {/* Center Showcase Project Image Card (Z-0) - 100% Dead Centered Vertically & Horizontally */}
+              {/* Center Showcase Project Image Card (Z-0) - 100% Dead Centered Vertically & Horizontally (opacity: 0 default to prevent refresh FOUC) */}
               <div
                 ref={centerImageRef}
-                className="absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-48px)] md:w-[calc(100vw-120px)] max-w-[1320px] aspect-[19/12] rounded-xl sm:rounded-2xl overflow-hidden bg-black/10 border border-black/10 will-change-transform cursor-pointer"
+                style={{ opacity: 0 }}
+                className="absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-48px)] md:w-[calc(100vw-120px)] max-w-[1320px] aspect-[19/12] rounded-xl sm:rounded-2xl overflow-hidden bg-black/10 border border-black/10 will-change-transform cursor-pointer opacity-0"
               >
                 <Image
                   src="/parvezz.jpeg"
