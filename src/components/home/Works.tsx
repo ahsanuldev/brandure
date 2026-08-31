@@ -27,9 +27,9 @@ export const Works: React.FC = () => {
       )
         return;
 
-      // Initial state: Set dead-center alignment (+6px compensation for 'R' font glyph side-bearing)
+      // Initial state: Set exact screen dead-center alignment (50% left, 50% top)
       gsap.set(centerImageRef.current, {
-        left: "calc(50% + 6px)",
+        left: "50%",
         top: "50%",
         xPercent: -50,
         yPercent: -50,
@@ -84,7 +84,7 @@ export const Works: React.FC = () => {
     <section
       id="works"
       ref={containerRef}
-      className="relative z-20 w-full bg-[#FAF1DF] pt-16 md:pt-24 cursor-default border-t border-[#161616]/10"
+      className="relative z-20 w-full bg-[#FAF1DF] pt-16 md:pt-24 cursor-default"
     >
       {/* 1. Section Header: Subtitle & Headline - Standard layout, ZERO pin effect, scrolls UP normally */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] w-full">
@@ -105,10 +105,10 @@ export const Works: React.FC = () => {
           <div className="w-full flex items-center justify-center">
             {/* Layered container holding Center Image behind and WO + RK on top */}
             <div className="relative w-full flex items-center justify-center min-h-[450px] lg:min-h-[560px]">
-              {/* Center Showcase Project Image Card (Z-0) - 100% Dead Centered Vertically & Horizontally (+6px font side-bearing offset) */}
+              {/* Center Showcase Project Image Card (Z-0) - 100% Dead Centered Vertically & Horizontally */}
               <div
                 ref={centerImageRef}
-                className="absolute z-0 top-1/2 left-[calc(50%+6px)] -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-48px)] md:w-[calc(100vw-120px)] max-w-[1320px] aspect-[19/12] rounded-xl sm:rounded-2xl overflow-hidden bg-black/10 border border-black/10 will-change-transform cursor-pointer"
+                className="absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-48px)] md:w-[calc(100vw-120px)] max-w-[1320px] aspect-[19/12] rounded-xl sm:rounded-2xl overflow-hidden bg-black/10 border border-black/10 will-change-transform cursor-pointer"
               >
                 <Image
                   src="/parvezz.jpeg"
