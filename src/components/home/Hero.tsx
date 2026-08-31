@@ -118,7 +118,7 @@ export const Hero: React.FC = () => {
         className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none overflow-hidden"
       >
         <Image
-          src="/hero-bg.jpg"
+          src="/parvezz.jpeg"
           alt="Hero background"
           fill
           priority
