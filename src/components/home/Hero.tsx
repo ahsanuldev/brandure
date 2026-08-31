@@ -21,13 +21,15 @@ export const Hero: React.FC = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const subheadingRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       if (!heroRef.current || !contentRef.current) return;
 
-      // Header slide down from top on page load
+      // 1. Header slide down from top on page load
       if (headerRef.current) {
         gsap.to(headerRef.current, {
           y: 0,
@@ -38,22 +40,18 @@ export const Hero: React.FC = () => {
         });
       }
 
-      // Letter-by-letter blur reveal for subheading
-      const subheadingLetters =
-        heroRef.current.querySelectorAll(".subheading-letter");
-      if (subheadingLetters.length > 0) {
-        gsap.to(subheadingLetters, {
-          opacity: 1,
-          filter: "blur(0px)",
+      // 2. Subheading text slide in from bottom on page load
+      if (subheadingRef.current) {
+        gsap.to(subheadingRef.current, {
           y: 0,
-          duration: 0.6,
-          stagger: 0.012,
-          ease: "power2.out",
-          delay: 0.1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.15,
         });
       }
 
-      // CTA button slide in from bottom on page load
+      // 3. CTA button slide in from bottom on page load right after subheading text
       if (ctaRef.current) {
         gsap.to(ctaRef.current, {
           y: 0,
@@ -64,7 +62,7 @@ export const Hero: React.FC = () => {
         });
       }
 
-      // Letter-by-letter blur reveal for hero giant title
+      // 4. Letter-by-letter blur reveal for hero giant title
       const letters = heroRef.current.querySelectorAll(".hero-letter");
       if (letters.length > 0) {
         gsap.to(letters, {
@@ -74,7 +72,18 @@ export const Hero: React.FC = () => {
           duration: 0.8,
           stagger: 0.035,
           ease: "power3.out",
-          delay: 0.2,
+          delay: 0.25,
+        });
+      }
+
+      // 5. Bottom footer metadata row slide in from bottom on page load
+      if (footerRef.current) {
+        gsap.to(footerRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.45,
         });
       }
 
@@ -146,34 +155,24 @@ export const Hero: React.FC = () => {
         ref={contentRef}
         className="relative z-10 w-full flex-1 flex flex-col justify-between"
       >
-        {/* Middle Subheading Content */}
+        {/* Middle Subheading Content & CTA Button */}
         <div className="section-container flex flex-col items-start pt-4 md:pt-8 pb-6">
           <div className="max-w-[423px] flex flex-col items-start gap-6">
-            <h6 className="heading-06 text-white leading-[1.3] tracking-[-0.01em]">
-              {subheadingText.split(" ").map((word, wordIndex) => (
-                <span
-                  key={wordIndex}
-                  className="inline-block whitespace-nowrap mr-[0.25em]"
-                >
-                  {word.split("").map((char, charIndex) => (
-                    <span
-                      key={charIndex}
-                      className="subheading-letter inline-block"
-                      style={{
-                        opacity: 0,
-                        filter: "blur(12px)",
-                        transform: "translateY(16px)",
-                        willChange: "transform, filter, opacity",
-                      }}
-                    >
-                      {char}
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </h6>
+            {/* Subheading Text with Slide-In Animation */}
+            <div
+              ref={subheadingRef}
+              style={{
+                opacity: 0,
+                transform: "translateY(40px)",
+                willChange: "transform, opacity",
+              }}
+            >
+              <h6 className="heading-06 text-white leading-[1.3] tracking-[-0.01em]">
+                {subheadingText}
+              </h6>
+            </div>
 
-            {/* Start a project CTA Button with Initial Slide-In Animation */}
+            {/* Start a project CTA Button with Slide-In Animation after Subheading */}
             <div
               ref={ctaRef}
               style={{
@@ -207,8 +206,16 @@ export const Hero: React.FC = () => {
             ))}
           </h1>
 
-          {/* Bottom Footer Row */}
-          <div className="w-full flex items-center justify-between paragraph-large">
+          {/* Bottom Footer Row with Slide-In Animation */}
+          <div
+            ref={footerRef}
+            className="w-full flex items-center justify-between paragraph-large"
+            style={{
+              opacity: 0,
+              transform: "translateY(35px)",
+              willChange: "transform, opacity",
+            }}
+          >
             <span>© 2026 Brandure. All Rights Reserved.</span>
             <span>(Scroll down)</span>
           </div>

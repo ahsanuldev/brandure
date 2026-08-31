@@ -66,7 +66,7 @@ export const Projects: React.FC = () => {
                 <h3 className="heading-02 text-white uppercase max-w-3xl leading-[0.95] drop-shadow-md">
                   {project.title}
                 </h3>
-                <p className="paragraph-large text-white/85 max-w-xl font-normal leading-relaxed drop-shadow-sm">
+                <p className="paragraph-large text-white/85 max-w-md font-normal leading-relaxed drop-shadow-sm">
                   {project.description}
                 </p>
               </div>
