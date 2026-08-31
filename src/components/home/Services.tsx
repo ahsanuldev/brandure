@@ -254,7 +254,7 @@ export const Services: React.FC = () => {
             <div
               key={service.number}
               onMouseEnter={() => handleMouseEnterRow(index)}
-              className="service-row border-t border-[#161616]/15 py-8 lg:py-10 flex flex-col md:flex-row items-start md:items-start justify-between gap-6 md:gap-8 group cursor-pointer"
+              className="service-row border-t border-[#161616]/15 py-8 lg:py-10 flex flex-col md:flex-row items-start md:items-start justify-between gap-6 md:gap-8 group md:cursor-none cursor-pointer"
             >
               {/* Left Number */}
               <span className="text-base lg:text-lg font-sans font-medium text-[#161616]/50 w-12 md:w-14 shrink-0 pt-0.5 md:pt-0">
