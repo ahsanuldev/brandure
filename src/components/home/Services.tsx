@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -51,6 +51,7 @@ export const Services: React.FC = () => {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevIndexRef = useRef<number | null>(null);
   const isCursorVisibleRef = useRef<boolean>(false);
+  const lastMousePosRef = useRef<{ x: number; y: number }>({ x: -1, y: -1 });
 
   const xTo = useRef<gsap.QuickToFunc | null>(null);
   const yTo = useRef<gsap.QuickToFunc | null>(null);
@@ -109,7 +110,60 @@ export const Services: React.FC = () => {
     { scope: containerRef }
   );
 
+  const handleMouseLeaveList = () => {
+    isCursorVisibleRef.current = false;
+    if (cursorRef.current) {
+      gsap.to(cursorRef.current, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          prevIndexRef.current = null;
+        },
+      });
+    } else {
+      prevIndexRef.current = null;
+    }
+  };
+
+  // Global mousemove tracking + Scroll detection to sync cursor position and prevent top-left corner jump
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handleScrollCheck = () => {
+      const { x, y } = lastMousePosRef.current;
+      if (x < 0 || y < 0) return;
+
+      const elementUnderCursor = document.elementFromPoint(x, y);
+      const row = elementUnderCursor?.closest(".service-row") as HTMLElement | null;
+
+      if (row) {
+        const indexAttr = row.getAttribute("data-index");
+        if (indexAttr !== null) {
+          const index = parseInt(indexAttr, 10);
+          handleMouseEnterRow(index);
+        }
+      } else {
+        if (isCursorVisibleRef.current) {
+          handleMouseLeaveList();
+        }
+      }
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove, { passive: true });
+    window.addEventListener("scroll", handleScrollCheck, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
+      window.removeEventListener("scroll", handleScrollCheck);
+    };
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    lastMousePosRef.current = { x: e.clientX, y: e.clientY };
     if (xTo.current && yTo.current) {
       xTo.current(e.clientX);
       yTo.current(e.clientY);
@@ -118,6 +172,14 @@ export const Services: React.FC = () => {
 
   const handleMouseEnterRow = (newIndex: number) => {
     const prevIndex = prevIndexRef.current;
+
+    // Instantly sync cursor follower position to current mouse coordinates to prevent top-left jump
+    const { x, y } = lastMousePosRef.current;
+    if (x >= 0 && y >= 0 && cursorRef.current) {
+      gsap.set(cursorRef.current, { x, y });
+      if (xTo.current) xTo.current(x);
+      if (yTo.current) yTo.current(y);
+    }
 
     // Reveal cursor container if hidden
     if (cursorRef.current && !isCursorVisibleRef.current) {
@@ -175,28 +237,12 @@ export const Services: React.FC = () => {
     prevIndexRef.current = newIndex;
   };
 
-  const handleMouseLeaveList = () => {
-    isCursorVisibleRef.current = false;
-    if (cursorRef.current) {
-      gsap.to(cursorRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          prevIndexRef.current = null;
-        },
-      });
-    } else {
-      prevIndexRef.current = null;
-    }
-  };
-
   return (
     <section
       id="services"
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeaveList}
       className="relative z-20 w-full bg-[#FAF1DF] py-16 md:py-24 lg:py-32 border-t border-[#161616]/10 cursor-default"
     >
       {/* Floating Image Cursor Follower */}
@@ -253,6 +299,7 @@ export const Services: React.FC = () => {
           {servicesData.map((service, index) => (
             <div
               key={service.number}
+              data-index={index}
               onMouseEnter={() => handleMouseEnterRow(index)}
               className="service-row border-t border-[#161616]/15 py-8 lg:py-10 flex flex-col md:flex-row items-start md:items-start justify-between gap-6 md:gap-8 group md:cursor-none cursor-pointer"
             >
