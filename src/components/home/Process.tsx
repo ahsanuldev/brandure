@@ -52,7 +52,7 @@ export const Process: React.FC = () => {
         </div>
 
         {/* Sticky Stacking Circles Container (01, 02, 03, 04) - Stacks One on Top of Another */}
-        <div className="relative w-full flex flex-col items-center md:items-end justify-center gap-16 sm:gap-24 pt-4 pb-20 md:pb-32">
+        <div className="relative w-full flex flex-col items-center md:items-end justify-center gap-16 sm:gap-24 pt-4 pb-0">
           {processSteps.map((step, idx) => {
             // Arc stroke calculation for each step ring
             const strokeDashoffset = C - (C / processSteps.length) * (idx + 1);
