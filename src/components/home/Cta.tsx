@@ -1,0 +1,142 @@
+"use client";
+
+import React, { useRef } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const marqueePhrases = [
+  "LET'S COLLABORATE",
+  "DESIGN WITH PURPOSE",
+  "BRAND DESIGN",
+  "WEB EXPERIENCES",
+  "VISUAL STORYTELLING",
+];
+
+export const Cta: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const tickerRef = useRef<HTMLDivElement>(null);
+
+  // Smooth infinite GSAP marquee loop for the 36px ticker text
+  useGSAP(
+    () => {
+      if (!tickerRef.current) return;
+
+      const tickerContent = tickerRef.current.querySelector(".marquee-content");
+      if (!tickerContent) return;
+
+      gsap.to(tickerContent, {
+        xPercent: -50,
+        repeat: -1,
+        duration: 25,
+        ease: "none",
+      });
+    },
+    { scope: sectionRef }
+  );
+
+  return (
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative z-20 w-full min-h-[819px] h-[819px] bg-[#0A0A0A] overflow-hidden flex flex-col items-center justify-center"
+    >
+      {/* Dark Ambient Background Glow Image - Width matching section-container (1440px max-w) */}
+      <div className="absolute inset-x-0 bottom-0 flex justify-center items-end pointer-events-none z-0 overflow-hidden h-full">
+        <div className="relative w-full px-6 h-[1000px] translate-y-24 sm:translate-y-72">
+          <Image
+            src="/CTA-bg.png"
+            alt="CTA Background"
+            fill
+            className="object-contain object-bottom opacity-85 blur-[8px]"
+            priority
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 w-full flex flex-col items-center text-center">
+        {/* Section Header matching site typography */}
+        <div className="flex flex-col items-center justify-center text-center gap-3 mb-6 sm:mb-8 px-6">
+          <h6 className="heading-06 text-white tracking-wider uppercase font-medium">
+            CONTACT US
+          </h6>
+          <h2 className="font-heading text-5xl sm:text-7xl lg:text-[84px] text-white uppercase leading-[0.95] tracking-[-0.02em]">
+            LET&apos;S CREATE <br />
+            TOGETHER
+          </h2>
+        </div>
+
+        {/* Center Block: Image Card & Marquee Ticker centered right through its middle */}
+        <div className="relative w-full flex items-center justify-center mt-2 sm:mt-4">
+          {/* Ticker Marquee Layer - Positioned exactly at vertical dead-center of image */}
+          <div
+            ref={tickerRef}
+            className="absolute top-1/2 -translate-y-1/2 inset-x-0 z-10 overflow-hidden whitespace-nowrap pointer-events-none"
+          >
+            <div className="marquee-content inline-flex items-center gap-8 sm:gap-12">
+              {[...Array(4)].map((_, groupIdx) => (
+                <React.Fragment key={groupIdx}>
+                  {marqueePhrases.map((phrase, idx) => (
+                    <span
+                      key={`${groupIdx}-${idx}`}
+                      className="font-heading text-[28px] sm:text-[36px] text-white/60 uppercase leading-[1.2] tracking-[-0.02em] flex items-center gap-8 sm:gap-12"
+                    >
+                      <span>{phrase}</span>
+                      <span className="opacity-80 text-xl sm:text-2xl">✦</span>
+                    </span>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          {/* Center Model Image Card (Outer box/border removed) */}
+          <div className="relative z-20 w-[300px] sm:w-[420px] md:w-[480px] h-[240px] sm:h-[320px] md:h-[360px] rounded-[24px] sm:rounded-[32px] overflow-visible bg-red-500 mx-auto">
+            <Image
+              src="/CTA-IMG.png"
+              alt="Let's Create Together Model"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 300px, 480px"
+              priority
+            />
+          </div>
+
+          {/* Start a Project CTA Button overlapping bottom of card */}
+          <div className="absolute -bottom-6 sm:-bottom-7 z-30 inset-x-0 flex justify-center">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-3 sm:gap-4 bg-white hover:bg-white/95 text-[#111111] font-sans text-sm sm:text-base font-medium pl-6 pr-2 py-2 sm:py-2.5 rounded-full transition-transform hover:scale-105 shadow-2xl"
+            >
+              <span>Start a project</span>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FF5528] flex items-center justify-center text-white shrink-0 group-hover:translate-x-0.5 transition-transform">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.33334 8H12.6667M12.6667 8L8 3.33334M12.6667 8L8 12.6667"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Cta;

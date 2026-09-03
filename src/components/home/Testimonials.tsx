@@ -66,10 +66,11 @@ export const Testimonials: React.FC = () => {
 
       // Desktop animation: Pinned 2-phase zoom animation for screens >= 768px
       mm.add("(min-width: 768px)", () => {
-        const elementsToAnimate = containerRef.current?.querySelectorAll(".testimonial-card");
+        if (!containerRef.current || !textRef.current) return;
+        const elementsToAnimate = containerRef.current.querySelectorAll(".testimonial-card");
 
         gsap.set(textRef.current, { scale: 0.35, opacity: 0 });
-        if (elementsToAnimate && elementsToAnimate.length > 0) {
+        if (elementsToAnimate.length > 0) {
           gsap.set(elementsToAnimate, { scale: 0.4, opacity: 0 });
         }
 
@@ -83,7 +84,7 @@ export const Testimonials: React.FC = () => {
             invalidateOnRefresh: true,
             onLeaveBack: () => {
               if (textRef.current) gsap.set(textRef.current, { opacity: 0, scale: 0.35 });
-              if (elementsToAnimate && elementsToAnimate.length) {
+              if (elementsToAnimate.length > 0) {
                 gsap.set(elementsToAnimate, { opacity: 0, scale: 0.4 });
               }
             },
@@ -100,26 +101,31 @@ export const Testimonials: React.FC = () => {
             ease: "power2.out",
           },
           0
-        )
-        // 2. Testimonial Cards Scale-In
-        .to(
-          elementsToAnimate,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: "power2.out",
-          },
-          0.32
         );
+
+        // 2. Testimonial Cards Scale-In
+        if (elementsToAnimate.length > 0) {
+          tl.to(
+            elementsToAnimate,
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.5,
+              stagger: 0.05,
+              ease: "power2.out",
+            },
+            0.32
+          );
+        }
       });
 
       // Mobile layout (< 768px): No GSAP pinning/zoom, normal static display
       mm.add("(max-width: 767px)", () => {
         if (textRef.current) gsap.set(textRef.current, { scale: 1, opacity: 1 });
-        const elementsToAnimate = containerRef.current?.querySelectorAll(".testimonial-card");
-        if (elementsToAnimate) gsap.set(elementsToAnimate, { scale: 1, opacity: 1 });
+        if (containerRef.current) {
+          const elementsToAnimate = containerRef.current.querySelectorAll(".testimonial-card");
+          if (elementsToAnimate.length > 0) gsap.set(elementsToAnimate, { scale: 1, opacity: 1 });
+        }
       });
 
       return () => mm.revert();
