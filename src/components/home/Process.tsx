@@ -37,7 +37,7 @@ export const Process: React.FC = () => {
   return (
     <section
       id="process"
-      className="relative z-20 w-full bg-[#111111] py-16 sm:py-24 md:py-32 text-white overflow-hidden"
+      className="relative z-20 w-full bg-[#111111] py-16 sm:py-24 md:py-32 text-white"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] w-full flex flex-col gap-14 sm:gap-20 items-start">
         {/* Top Section Header: Subtitle & Headline */}
@@ -51,8 +51,8 @@ export const Process: React.FC = () => {
           </h2>
         </div>
 
-        {/* Stacked Vertical Circles Container (01, 02, 03, 04) - Compact Spacing */}
-        <div className="w-full flex flex-col items-center md:items-end justify-center gap-10 sm:gap-14 pt-2">
+        {/* Sticky Stacking Circles Container (01, 02, 03, 04) - Stacks One on Top of Another */}
+        <div className="relative w-full flex flex-col items-center md:items-end justify-center gap-16 sm:gap-24 pt-4 pb-20 md:pb-32">
           {processSteps.map((step, idx) => {
             // Arc stroke calculation for each step ring
             const strokeDashoffset = C - (C / processSteps.length) * (idx + 1);
@@ -60,7 +60,11 @@ export const Process: React.FC = () => {
             return (
               <div
                 key={step.number}
-                className="relative w-[340px] sm:w-[460px] lg:w-[535px] h-[340px] sm:h-[460px] lg:h-[535px] aspect-square flex items-center justify-center select-none"
+                style={{
+                  zIndex: idx + 10,
+                  top: "140px",
+                }}
+                className="sticky w-[340px] sm:w-[460px] lg:w-[535px] h-[340px] sm:h-[460px] lg:h-[535px] aspect-square flex items-center justify-center select-none bg-[#111111] rounded-full"
               >
                 {/* SVG Ring Graphic */}
                 <svg
