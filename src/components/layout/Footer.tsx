@@ -14,7 +14,7 @@ const navLinks = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-primary pt-16 sm:pt-20 md:pt-28 pb-6 sm:pb-8 overflow-hidden text-white">
+    <footer className="w-full bg-primary pt-16 sm:pt-20 md:pt-28 pb-[14px] overflow-hidden text-white">
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] flex flex-col justify-between">
         {/* Top Block: Intro & Email + Dark Get Started Card */}
         <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
@@ -25,14 +25,14 @@ export const Footer: React.FC = () => {
             </p>
             <a
               href="mailto:INFO@BRANDURE.COM"
-              className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-[82px] text-white tracking-[-0.02em] leading-none uppercase underline underline-offset-[10px] sm:underline-offset-[14px] decoration-2 sm:decoration-[3px] decoration-white/60 hover:decoration-white transition-colors block mt-4 sm:mt-6"
+              className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-[82px] text-white tracking-[-0.02em] leading-none uppercase underline underline-offset-[10px] sm:underline-offset-[20px] decoration-2 sm:decoration-[4px] decoration-white hover:decoration-text-primary transition-colors block mt-4 sm:mt-6 duration-300"
             >
               INFO@BRANDURE.COM
             </a>
           </div>
 
           {/* Right Column: Dark Get Started Card with Button */}
-          <div className="bg-[#111111] rounded-[24px] p-6 sm:p-8 flex flex-col items-start justify-between gap-8 min-w-[280px] sm:min-w-[320px] lg:min-w-[340px] shrink-0">
+          <div className="bg-text-primary rounded-[24px] p-5 flex flex-col items-start justify-between gap-18  shrink-0">
             <h3 className="font-heading text-3xl sm:text-4xl text-white uppercase leading-none tracking-tight">
               GET STARTED
             </h3>
@@ -68,11 +68,40 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Block: Giant Brand Name Title */}
-        <div className="w-full mt-16 sm:mt-20 md:mt-28 flex justify-center items-end pointer-events-none select-none overflow-hidden pt-4">
-          <h1 className="font-heading text-[12.5vw] xl:text-[180px] text-bg leading-[0.82] uppercase tracking-[-0.03em] whitespace-nowrap text-center">
-            BRANDURE STUDIO
-          </h1>
+        {/* Bottom Block: Giant Brand Name Title (Edge-to-Edge aligned with taller text height) */}
+        <div className="w-full mt-12 sm:mt-16 md:mt-20 select-none pointer-events-none overflow-hidden">
+          <svg
+            viewBox="0 0 1000 170"
+            className="w-full h-auto text-bg fill-current block"
+            preserveAspectRatio="none"
+          >
+            {/* Left Word: BRANDURE */}
+            <text
+              x="0"
+              y="165"
+              textLength="570"
+              lengthAdjust="spacingAndGlyphs"
+              className="font-heading font-normal uppercase"
+              fontSize="165"
+              fill="currentColor"
+            >
+              BRANDURE
+            </text>
+
+            {/* Right Word: STUDIO */}
+            <text
+              x="1000"
+              y="165"
+              textAnchor="end"
+              textLength="405"
+              lengthAdjust="spacingAndGlyphs"
+              className="font-heading font-normal uppercase"
+              fontSize="165"
+              fill="currentColor"
+            >
+              STUDIO
+            </text>
+          </svg>
         </div>
       </div>
     </footer>
