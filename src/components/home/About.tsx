@@ -68,48 +68,57 @@ export const About: React.FC = () => {
             className="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-2 lg:gap-3 w-full mt-10 md:mt-14 items-stretch overflow-hidden py-1"
           >
             {/* Card 1: 300K USERS (Beige) */}
-            <div className="w-full sm:w-[365px] shrink-0 bg-[#FAF1DF] rounded-2xl p-5 lg:p-6 flex flex-col justify-between h-[172px]">
+            <div className="w-full sm:w-[365px] shrink-0 bg-[#FAF1DF] rounded-2xl p-5 lg:p-6 flex flex-col justify-between gap-5 sm:gap-0 h-auto sm:h-[172px]">
               <div className="flex items-end gap-1.5 font-heading text-[#161616]">
-                <span className="text-4xl lg:text-[46px] leading-none">300K</span>
-                <span className="text-lg lg:text-[22px] uppercase tracking-wider font-heading leading-none translate-y-1">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] leading-none">300K</span>
+                <span className="text-base sm:text-lg lg:text-[22px] uppercase tracking-wider font-heading leading-none translate-y-0.5 sm:translate-y-1">
                   USERS
                 </span>
               </div>
-              <p className="paragraph-medium text-[#161616]/85">
+              <p className="text-sm sm:paragraph-medium text-[#161616]/85">
                 Brandure continues attracting a growing user base across global creative brands.
               </p>
             </div>
 
             {/* Card 2: 94 % (Dark) */}
-            <div className="w-full sm:w-[215px] lg:flex-1 max-w-[240px] shrink-0 bg-[#161616] rounded-2xl p-5 lg:p-6 flex flex-col justify-between h-[172px]">
+            <div className="w-full sm:w-[215px] sm:max-w-[240px] lg:flex-1 lg:max-w-none shrink-0 bg-[#161616] rounded-2xl p-5 lg:p-6 flex flex-col justify-between gap-5 sm:gap-0 h-auto sm:h-[172px]">
               <div className="flex items-end gap-1.5 font-heading text-white">
-                <span className="text-4xl lg:text-[46px] leading-none">94</span>
-                <span className="text-lg lg:text-[22px] font-heading leading-none translate-y-1">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] leading-none">94</span>
+                <span className="text-base sm:text-lg lg:text-[22px] font-heading leading-none translate-y-0.5 sm:translate-y-1">
                   %
                 </span>
               </div>
-              <p className="paragraph-medium text-white/85">
+              <p className="text-sm sm:paragraph-medium text-white/85">
                 Clients report higher satisfaction and retention
               </p>
             </div>
 
             {/* Card 3: 22 K (White) */}
-            <div className="w-full sm:w-[215px] lg:flex-1 max-w-[240px] shrink-0 bg-white rounded-2xl p-5 lg:p-6 flex flex-col justify-between h-[172px]">
+            <div className="w-full sm:w-[215px] sm:max-w-[240px] lg:flex-1 lg:max-w-none shrink-0 bg-white rounded-2xl p-5 lg:p-6 flex flex-col justify-between gap-5 sm:gap-0 h-auto sm:h-[172px]">
               <div className="flex items-end gap-1.5 font-heading text-[#161616]">
-                <span className="text-4xl lg:text-[46px] leading-none">22</span>
-                <span className="text-lg lg:text-[22px] font-heading leading-none translate-y-1">
+                <span className="text-3xl sm:text-4xl lg:text-[46px] leading-none">22</span>
+                <span className="text-base sm:text-lg lg:text-[22px] font-heading leading-none translate-y-0.5 sm:translate-y-1">
                   K
                 </span>
               </div>
-              <p className="paragraph-medium text-[#161616]/85">
+              <p className="text-sm sm:paragraph-medium text-[#161616]/85">
                 Projects delivered with consistent quality
               </p>
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button (sm on mobile, md on desktop) */}
           <div className="mt-8 md:mt-10">
-            <Button variant="light">Start a project</Button>
+            <div className="md:hidden">
+              <Button variant="light" size="sm">
+                Start a project
+              </Button>
+            </div>
+            <div className="hidden md:block">
+              <Button variant="light" size="md">
+                Start a project
+              </Button>
+            </div>
           </div>
         </div>
       </div>

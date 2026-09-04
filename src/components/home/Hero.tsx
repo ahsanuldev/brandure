@@ -235,7 +235,7 @@ export const Hero: React.FC = () => {
           {/* Bottom Footer Row with Slide-In Animation */}
           <div
             ref={footerRef}
-            className="w-full flex flex-row items-center justify-between gap-2 text-[11px] sm:text-xs md:paragraph-large"
+            className="w-full flex flex-row items-center justify-between gap-2 text-[11px] sm:text-xs md:text-[18px] md:font-medium md:leading-[1.5] md:tracking-[-0.01em]"
             style={{
               opacity: 0,
               transform: "translateY(35px)",
