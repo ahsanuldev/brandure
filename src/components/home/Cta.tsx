@@ -96,13 +96,13 @@ export const Cta: React.FC = () => {
           </div>
 
           {/* Center Model Image Card (Outer box/border removed) */}
-          <div className="relative z-20 w-[300px] sm:w-[420px] md:w-[480px] h-[240px] sm:h-[320px] md:h-[360px] rounded-[24px] sm:rounded-[32px] overflow-visible bg-red-500 mx-auto">
+          <div className="relative z-20 w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent mx-auto border border-red-400">
             <Image
               src="/CTA-IMG.png"
               alt="Let's Create Together Model"
               fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 300px, 480px"
+              className="object-contain w-full"
+              // sizes="(max-width: 768px) 300px, 480px"
               priority
             />
           </div>
@@ -114,7 +114,7 @@ export const Cta: React.FC = () => {
               className="group inline-flex items-center gap-3 sm:gap-4 bg-white hover:bg-white/95 text-[#111111] font-sans text-sm sm:text-base font-medium pl-6 pr-2 py-2 sm:py-2.5 rounded-full transition-transform hover:scale-105 shadow-2xl"
             >
               <span>Start a project</span>
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FF5528] flex items-center justify-center text-white shrink-0 group-hover:translate-x-0.5 transition-transform">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary flex items-center justify-center text-white shrink-0 group-hover:translate-x-0.5 transition-transform">
                 <svg
                   width="16"
                   height="16"
