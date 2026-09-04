@@ -99,8 +99,9 @@ export const Hero: React.FC = () => {
         },
       });
 
-      // Background image subtle parallax zoom/scale
+      // Fixed background image subtle parallax zoom/scale & autoAlpha scroll fade
       if (bgRef.current) {
+        // Zoom scale animation while fixed
         gsap.to(bgRef.current, {
           scale: 1.08,
           ease: "none",
@@ -111,6 +112,22 @@ export const Hero: React.FC = () => {
             scrub: true,
           },
         });
+
+        // Fade in at top of page and fade out as user scrolls into About section
+        gsap.fromTo(
+          bgRef.current,
+          { autoAlpha: 1 },
+          {
+            autoAlpha: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom+=80% top",
+              scrub: true,
+            },
+          }
+        );
       }
     },
     { scope: heroRef }
@@ -121,10 +138,10 @@ export const Hero: React.FC = () => {
       ref={heroRef}
       className="relative w-full h-screen flex flex-col justify-between overflow-hidden bg-[#0d0e10] text-white z-0"
     >
-      {/* Hero Background Image */}
+      {/* Fixed Hero Background Image (opacity-0 in initial CSS to prevent refresh flash) */}
       <div
         ref={bgRef}
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden"
+        className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none overflow-hidden opacity-0"
       >
         <Image
           src="/parvezz.jpeg"
