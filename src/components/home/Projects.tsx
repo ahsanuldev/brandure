@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-const projectsCards = [
+export const projectsCards = [
   {
     id: "01",
     title: "VISUAL STORYTELLING",
@@ -34,7 +34,7 @@ export const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative z-20 w-full bg-[#FAF1DF] pb-32 md:pb-48 cursor-default"
+      className="hidden md:block relative z-20 w-full bg-[#FAF1DF] pb-32 md:pb-48 cursor-default"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] w-full">
         {/* Simple Sticky Stacking Cards Container - 20px gap between cards */}

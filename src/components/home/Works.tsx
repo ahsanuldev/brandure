@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { projectsCards } from "./Projects";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -27,55 +28,59 @@ export const Works: React.FC = () => {
       )
         return;
 
-      // Initial state: Set exact screen dead-center alignment (50% left, 50% top)
-      gsap.set(centerImageRef.current, {
-        left: "50%",
-        top: "50%",
-        xPercent: -50,
-        yPercent: -50,
-        scale: 0.2,
-        opacity: 0,
-        transformOrigin: "center center",
-      });
+      const mm = gsap.matchMedia();
 
-      // GSAP ScrollTrigger timeline scrubbed through the 250vh track
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: trackRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-      });
+      mm.add("(min-width: 768px)", () => {
+        // Initial state: Set exact screen dead-center alignment (50% left, 50% top)
+        gsap.set(centerImageRef.current, {
+          left: "50%",
+          top: "50%",
+          xPercent: -50,
+          yPercent: -50,
+          scale: 0.2,
+          opacity: 0,
+          transformOrigin: "center center",
+        });
 
-      // 1. WO moves left past section boundary (-65vw) starting at position 0
-      tl.to(
-        woRef.current,
-        {
-          x: "-65vw",
-          ease: "none",
-        },
-        0
-      )
-      // 2. RK moves right past section boundary (+65vw) starting at position 0
-      .to(
-        rkRef.current,
-        {
-          x: "65vw",
-          ease: "none",
-        },
-        0
-      )
-      // 3. Center image expands smoothly to scale 1.0 (dead-centered horizontally & vertically)
-      .to(
-        centerImageRef.current,
-        {
-          scale: 1,
-          opacity: 1,
-          ease: "power1.out",
-        },
-        0.08
-      );
+        // GSAP ScrollTrigger timeline scrubbed through the 250vh track
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: trackRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+          },
+        });
+
+        // 1. WO moves left past section boundary (-65vw) starting at position 0
+        tl.to(
+          woRef.current,
+          {
+            x: "-65vw",
+            ease: "none",
+          },
+          0
+        )
+          // 2. RK moves right past section boundary (+65vw) starting at position 0
+          .to(
+            rkRef.current,
+            {
+              x: "65vw",
+              ease: "none",
+            },
+            0
+          )
+          // 3. Center image expands smoothly to scale 1.0 (dead-centered horizontally & vertically)
+          .to(
+            centerImageRef.current,
+            {
+              scale: 1,
+              opacity: 1,
+              ease: "power1.out",
+            },
+            0.08
+          );
+      });
     },
     { scope: containerRef }
   );
@@ -84,22 +89,51 @@ export const Works: React.FC = () => {
     <section
       id="works"
       ref={containerRef}
-      className="relative z-20 w-full bg-[#FAF1DF] pt-16 md:pt-24 cursor-default"
+      className="relative z-20 w-full bg-[#FAF1DF] pt-12 md:pt-24 pb-16 md:pb-0 cursor-default -mt-1 sm:-mt-0"
     >
-      {/* 1. Section Header: Subtitle & Headline - Standard layout, ZERO pin effect, scrolls UP normally */}
+      {/* 1. Section Header: Subtitle & Headline */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] w-full">
         <div className="w-full flex flex-col items-start gap-3">
           <h6 className="heading-06 text-[#161616] tracking-wider uppercase font-medium">
             SELECTED PROJECTS
           </h6>
-          <h2 className="font-heading text-5xl sm:text-7xl lg:text-[84px] text-[#161616] uppercase leading-[0.95] tracking-[-0.02em]">
+          <h2 className="font-heading text-4xl sm:text-7xl lg:text-[84px] text-[#161616] uppercase leading-[0.95] tracking-[-0.02em]">
             OUR SIGNATURE
           </h2>
         </div>
+
+        {/* Simple Mobile Projects List (Clean layout for mobile matching Figma screenshot) */}
+        <div className="md:hidden w-full flex flex-col gap-10 mt-8">
+          {projectsCards.map((project) => (
+            <div key={project.id} className="w-full flex flex-col items-start">
+              {/* Rounded Image Card */}
+              <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-black/10">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  priority={project.id === "01"}
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover object-center"
+                />
+              </div>
+
+              {/* Title Below Image */}
+              <h3 className="font-heading text-3xl text-[#161616] uppercase mt-5 leading-none">
+                {project.title}
+              </h3>
+
+              {/* Description Below Title */}
+              <p className="paragraph-medium text-[#5B5B5B] mt-2.5 leading-normal max-w-md">
+                {project.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* 2. Full Viewport Pinned Track Container (120vh tall track for snappy scroll animation completion) */}
-      <div ref={trackRef} className="relative w-full h-[180vh]">
+      {/* 2. Full Viewport Pinned Track Container (Desktop Only) */}
+      <div ref={trackRef} className="hidden md:block relative w-full h-[180vh]">
         <div className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden">
           {/* Inner wrapper full width with zero padding for exact 100vw screen centering */}
           <div className="w-full flex items-center justify-center">
