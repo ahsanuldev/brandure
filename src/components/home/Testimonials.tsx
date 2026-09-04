@@ -80,15 +80,8 @@ export const Testimonials: React.FC = () => {
             start: "top top",
             end: "+=80%",
             pin: true,
-            anticipatePin: 1,
-            scrub: 0.3,
+            scrub: true,
             invalidateOnRefresh: true,
-            onLeaveBack: () => {
-              if (textRef.current) gsap.set(textRef.current, { opacity: 0, scale: 0.35 });
-              if (elementsToAnimate.length > 0) {
-                gsap.set(elementsToAnimate, { opacity: 0, scale: 0.4 });
-              }
-            },
           },
         });
 
