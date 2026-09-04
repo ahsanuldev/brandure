@@ -19,11 +19,31 @@ const marqueePhrases = [
   "VISUAL STORYTELLING",
 ];
 
+const MarqueeTrack: React.FC = () => (
+  <div className="flex items-center gap-2 shrink-0 pr-6 sm:pr-8">
+    {[...Array(3)].map((_, groupIdx) => (
+      <React.Fragment key={groupIdx}>
+        {marqueePhrases.map((phrase, idx) => (
+          <div
+            key={`${groupIdx}-${idx}`}
+            className="flex items-center gap-2 font-heading text-[28px] sm:text-[36px] text-white/50 uppercase leading-none tracking-[-0.02em] whitespace-nowrap"
+          >
+            <span>{phrase}</span>
+            <span className="font-heading text-3xl sm:text-4xl leading-none text-white/40 select-none">
+              ✦
+            </span>
+          </div>
+        ))}
+      </React.Fragment>
+    ))}
+  </div>
+);
+
 export const Cta: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const tickerRef = useRef<HTMLDivElement>(null);
 
-  // Smooth infinite GSAP marquee loop for the 36px ticker text
+  // Smooth, 100% seamless infinite GSAP marquee loop
   useGSAP(
     () => {
       if (!tickerRef.current) return;
@@ -31,12 +51,31 @@ export const Cta: React.FC = () => {
       const tickerContent = tickerRef.current.querySelector(".marquee-content");
       if (!tickerContent) return;
 
-      gsap.to(tickerContent, {
-        xPercent: -50,
-        repeat: -1,
-        duration: 25,
-        ease: "none",
-      });
+      const anim = gsap.fromTo(
+        tickerContent,
+        { xPercent: 0 },
+        {
+          xPercent: -50,
+          repeat: -1,
+          duration: 55,
+          ease: "none",
+          force3D: true,
+        }
+      );
+
+      // Prevent jerk/jump when switching browser tabs by pausing when hidden and resuming when visible
+      const handleVisibilityChange = () => {
+        if (document.hidden) {
+          anim.pause();
+        } else {
+          anim.resume();
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
     },
     { scope: sectionRef }
   );
@@ -77,22 +116,11 @@ export const Cta: React.FC = () => {
           {/* Ticker Marquee Layer - Positioned exactly at vertical dead-center of image */}
           <div
             ref={tickerRef}
-            className="absolute top-1/2 -translate-y-1/2 inset-x-0 z-10 overflow-hidden whitespace-nowrap pointer-events-none"
+            className="absolute top-1/2 -translate-y-1/2 inset-x-0 z-10 overflow-hidden pointer-events-none select-none"
           >
-            <div className="marquee-content inline-flex items-center gap-2">
-              {[...Array(4)].map((_, groupIdx) => (
-                <React.Fragment key={groupIdx}>
-                  {marqueePhrases.map((phrase, idx) => (
-                    <span
-                      key={`${groupIdx}-${idx}`}
-                      className="font-heading text-[28px] sm:text-[36px] text-white opacity-50 uppercase leading-[1.2]  flex items-center gap-2"
-                    >
-                      <span>{phrase}</span>
-                      <span className="font-heading! text-5xl leading-1 -mt-1">✦</span>
-                    </span>
-                  ))}
-                </React.Fragment>
-              ))}
+            <div className="marquee-content flex w-max items-center">
+              <MarqueeTrack />
+              <MarqueeTrack />
             </div>
           </div>
 
@@ -118,3 +146,4 @@ export const Cta: React.FC = () => {
 };
 
 export default Cta;
+
