@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Button from "@/components/ui/button";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -78,16 +79,16 @@ export const Cta: React.FC = () => {
             ref={tickerRef}
             className="absolute top-1/2 -translate-y-1/2 inset-x-0 z-10 overflow-hidden whitespace-nowrap pointer-events-none"
           >
-            <div className="marquee-content inline-flex items-center gap-8 sm:gap-12">
+            <div className="marquee-content inline-flex items-center gap-2">
               {[...Array(4)].map((_, groupIdx) => (
                 <React.Fragment key={groupIdx}>
                   {marqueePhrases.map((phrase, idx) => (
                     <span
                       key={`${groupIdx}-${idx}`}
-                      className="font-heading text-[28px] sm:text-[36px] text-white/60 uppercase leading-[1.2] tracking-[-0.02em] flex items-center gap-8 sm:gap-12"
+                      className="font-heading text-[28px] sm:text-[36px] text-white opacity-50 uppercase leading-[1.2]  flex items-center gap-2"
                     >
                       <span>{phrase}</span>
-                      <span className="opacity-80 text-xl sm:text-2xl">✦</span>
+                      <span className="font-heading! text-5xl leading-1 -mt-1">✦</span>
                     </span>
                   ))}
                 </React.Fragment>
@@ -95,43 +96,20 @@ export const Cta: React.FC = () => {
             </div>
           </div>
 
-          {/* Center Model Image Card (Outer box/border removed) */}
-          <div className="relative z-20 w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent mx-auto border border-red-400">
+          {/* Center Model Image Card */}
+          <div className="relative z-20 w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent">
             <Image
-              src="/CTA-IMG.png"
+              src="/CTA-img2.png"
               alt="Let's Create Together Model"
               fill
               className="object-contain w-full"
-              // sizes="(max-width: 768px) 300px, 480px"
               priority
             />
           </div>
 
-          {/* Start a Project CTA Button overlapping bottom of card */}
+          {/* Start a project CTA Button overlapping bottom of card */}
           <div className="absolute -bottom-6 sm:-bottom-7 z-30 inset-x-0 flex justify-center">
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-3 sm:gap-4 bg-white hover:bg-white/95 text-[#111111] font-sans text-sm sm:text-base font-medium pl-6 pr-2 py-2 sm:py-2.5 rounded-full transition-transform hover:scale-105 shadow-2xl"
-            >
-              <span>Start a project</span>
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary flex items-center justify-center text-white shrink-0 group-hover:translate-x-0.5 transition-transform">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.33334 8H12.6667M12.6667 8L8 3.33334M12.6667 8L8 12.6667"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </a>
+            <Button variant="light">Start a project</Button>
           </div>
         </div>
       </div>
