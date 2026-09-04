@@ -39,10 +39,21 @@ export const Header: React.FC = () => {
           })}
         </nav>
 
-        {/* Start a project CTA Button */}
-        <Button variant="light" size="sm">
-          Start a project
-        </Button>
+        {/* Mobile 2-line Menu Button (No background, just 2 white lines) */}
+        <button
+          aria-label="Toggle Menu"
+          className="md:hidden p-2 bg-transparent flex flex-col items-end justify-center gap-[6px] cursor-pointer"
+        >
+          <span className="w-6 h-[2px] bg-white rounded-full" />
+          <span className="w-6 h-[2px] bg-white rounded-full" />
+        </button>
+
+        {/* Start a project CTA Button (Desktop) */}
+        <div className="hidden md:block">
+          <Button variant="light" size="sm">
+            Start a project
+          </Button>
+        </div>
       </div>
     </header>
   );

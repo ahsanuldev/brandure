@@ -172,9 +172,9 @@ export const Hero: React.FC = () => {
         ref={contentRef}
         className="relative z-10 w-full flex-1 flex flex-col justify-between"
       >
-        {/* Middle Subheading Content & CTA Button */}
-        <div className="section-container flex flex-col items-start pt-4 md:pt-8 pb-6">
-          <div className="max-w-[423px] flex flex-col items-start gap-6">
+        {/* Middle Subheading Content & CTA Button (Desktop: Top Left | Mobile: Pushed to bottom above giant title) */}
+        <div className="section-container flex-1 md:flex-initial flex flex-col justify-end md:justify-start items-start pt-2 md:pt-8 pb-12 md:pb-6">
+          <div className="max-w-[423px] flex flex-col items-start gap-4 sm:gap-6">
             {/* Subheading Text with Slide-In Animation */}
             <div
               ref={subheadingRef}
@@ -189,7 +189,7 @@ export const Hero: React.FC = () => {
               </h6>
             </div>
 
-            {/* Start a project CTA Button with Slide-In Animation after Subheading */}
+            {/* Start a project CTA Button with Slide-In Animation (sm on mobile, md on desktop) */}
             <div
               ref={ctaRef}
               style={{
@@ -198,13 +198,22 @@ export const Hero: React.FC = () => {
                 willChange: "transform, opacity",
               }}
             >
-              <Button variant="light">Start a project</Button>
+              <div className="md:hidden">
+                <Button variant="light" size="sm">
+                  Start a project
+                </Button>
+              </div>
+              <div className="hidden md:block">
+                <Button variant="light" size="md">
+                  Start a project
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Container: Giant Title & Footer Metadata */}
-        <div className="section-container w-full flex flex-col gap-4 pb-8">
+        <div className="section-container w-full flex flex-col gap-4 pb-8 pt-0 md:pt-0">
           {/* Giant Hero Title with Letter-by-Letter Blur Reveal */}
           <h1 className="w-full text-white font-heading font-normal uppercase leading-none tracking-[-0.03em] text-[13vw] xl:text-[180px] flex flex-wrap">
             {heroTitle.split("").map((char, index) => (
@@ -226,15 +235,15 @@ export const Hero: React.FC = () => {
           {/* Bottom Footer Row with Slide-In Animation */}
           <div
             ref={footerRef}
-            className="w-full flex items-center justify-between paragraph-large"
+            className="w-full flex flex-row items-center justify-between gap-2 text-[11px] sm:text-xs md:paragraph-large"
             style={{
               opacity: 0,
               transform: "translateY(35px)",
               willChange: "transform, opacity",
             }}
           >
-            <span>© 2026 Brandure. All Rights Reserved.</span>
-            <span>(Scroll down)</span>
+            <span className="whitespace-nowrap">© 2026 Brandure. All Rights Reserved.</span>
+            <span className="whitespace-nowrap">(Scroll down)</span>
           </div>
         </div>
       </div>
