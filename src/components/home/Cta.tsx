@@ -20,7 +20,7 @@ const marqueePhrases = [
 ];
 
 const MarqueeTrack: React.FC = () => (
-  <div className="flex items-center gap-2 shrink-0 pr-6 sm:pr-8">
+  <div className="flex items-center gap-2 shrink-0 pr-2">
     {[...Array(3)].map((_, groupIdx) => (
       <React.Fragment key={groupIdx}>
         {marqueePhrases.map((phrase, idx) => (

@@ -99,7 +99,7 @@ export const Hero: React.FC = () => {
         },
       });
 
-      // Fixed background image subtle parallax zoom/scale
+      // Background image subtle parallax zoom/scale
       if (bgRef.current) {
         gsap.to(bgRef.current, {
           scale: 1.08,
@@ -121,10 +121,10 @@ export const Hero: React.FC = () => {
       ref={heroRef}
       className="relative w-full h-screen flex flex-col justify-between overflow-hidden bg-[#0d0e10] text-white z-0"
     >
-      {/* Fixed Hero Background Image */}
+      {/* Hero Background Image */}
       <div
         ref={bgRef}
-        className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none overflow-hidden"
+        className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden"
       >
         <Image
           src="/parvezz.jpeg"

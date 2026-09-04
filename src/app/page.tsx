@@ -7,6 +7,7 @@ import Process from "@/components/home/Process";
 import Testimonials from "@/components/home/Testimonials";
 import Faq from "@/components/home/Faq";
 import Cta from "@/components/home/Cta";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,8 @@ export default function Home() {
       <Testimonials />
       <Faq />
       <Cta />
+      <Footer />
     </main>
   );
 }
+
