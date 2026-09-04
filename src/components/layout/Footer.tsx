@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Right Column: Dark Get Started Card with Button */}
-          <div className="bg-text-primary rounded-[24px] p-5 flex flex-col items-start justify-between gap-18  shrink-0">
+          <div className="bg-text-primary rounded-[24px] p-5 sm:p-6 flex flex-col items-start justify-between gap-8 sm:gap-14 w-full sm:w-auto shrink-0">
             <h3 className="font-heading text-3xl sm:text-4xl text-white uppercase leading-none tracking-tight">
               GET STARTED
             </h3>

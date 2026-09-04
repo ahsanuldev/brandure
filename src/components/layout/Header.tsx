@@ -19,8 +19,8 @@ export const Header: React.FC = () => {
 
       {/* Right Navigation & CTA Button */}
       <div className="flex items-center gap-3">
-        {/* Nav Links */}
-        <nav className="flex items-center gap-2">
+        {/* Nav Links (Desktop) */}
+        <nav className="hidden md:flex items-center gap-2">
           {navLinks.map((link) => {
             const isActive = link.name === "About";
             return (

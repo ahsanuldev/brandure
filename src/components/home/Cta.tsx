@@ -125,7 +125,7 @@ export const Cta: React.FC = () => {
           </div>
 
           {/* Center Model Image Card */}
-          <div className="relative z-20 w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent">
+          <div className="relative z-20 w-full max-w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent">
             <Image
               src="/CTA-img2.png"
               alt="Let's Create Together Model"
