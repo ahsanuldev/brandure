@@ -36,7 +36,16 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading text-3xl sm:text-4xl text-white uppercase leading-none tracking-tight">
               GET STARTED
             </h3>
-            <Button variant="light">Start a project</Button>
+            <div className="md:hidden">
+              <Button variant="light" size="sm">
+                Start a project
+              </Button>
+            </div>
+            <div className="hidden md:block">
+              <Button variant="light">
+                Start a project
+              </Button>
+            </div>
           </div>
         </div>
 

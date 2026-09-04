@@ -26,10 +26,10 @@ const MarqueeTrack: React.FC = () => (
         {marqueePhrases.map((phrase, idx) => (
           <div
             key={`${groupIdx}-${idx}`}
-            className="flex items-center gap-2 font-heading text-[28px] sm:text-[36px] text-white/50 uppercase leading-none tracking-[-0.02em] whitespace-nowrap"
+            className="flex items-center gap-2 font-heading text-[20px] sm:text-[28px] md:text-[36px] text-white/50 uppercase leading-none tracking-[-0.02em] whitespace-nowrap"
           >
             <span>{phrase}</span>
-            <span className="font-heading text-3xl sm:text-4xl leading-none text-white/40 select-none">
+            <span className="font-heading text-2xl sm:text-3xl md:text-4xl leading-none text-white/40 select-none">
               ✦
             </span>
           </div>
@@ -84,11 +84,11 @@ export const Cta: React.FC = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative z-20 w-full min-h-[819px] h-[819px] bg-[#0A0A0A] overflow-hidden flex flex-col items-center justify-center"
+      className="relative z-20 w-full py-16 md:py-0 min-h-0 md:min-h-[819px] h-auto md:h-[819px] bg-[#0A0A0A] overflow-hidden flex flex-col items-center justify-center"
     >
       {/* Dark Ambient Background Glow Image - Width matching section-container (1440px max-w) */}
       <div className="absolute inset-x-0 bottom-0 flex justify-center items-end pointer-events-none z-0 overflow-hidden h-full">
-        <div className="relative w-full px-6 h-[1000px] translate-y-24 sm:translate-y-72">
+        <div className="relative w-full px-6 h-[500px] sm:h-[700px] md:h-[1000px] translate-y-12 sm:translate-y-72">
           <Image
             src="/CTA-bg.png"
             alt="CTA Background"
@@ -101,11 +101,11 @@ export const Cta: React.FC = () => {
 
       <div className="relative z-10 w-full flex flex-col items-center text-center">
         {/* Section Header matching site typography */}
-        <div className="flex flex-col items-center justify-center text-center gap-3 mb-6 sm:mb-8 px-6">
+        <div className="flex flex-col items-center justify-center text-center gap-2 sm:gap-3 mb-4 sm:mb-8 px-6">
           <h6 className="heading-06 text-white tracking-wider uppercase font-medium">
             CONTACT US
           </h6>
-          <h2 className="font-heading text-5xl sm:text-7xl lg:text-[84px] text-white uppercase leading-[0.95] tracking-[-0.02em]">
+          <h2 className="font-heading text-4xl sm:text-7xl lg:text-[84px] text-white uppercase leading-[0.95] tracking-[-0.02em]">
             LET&apos;S CREATE <br />
             TOGETHER
           </h2>
@@ -125,7 +125,7 @@ export const Cta: React.FC = () => {
           </div>
 
           {/* Center Model Image Card */}
-          <div className="relative z-20 w-full max-w-[1000px] mx-auto h-[240px] sm:h-[320px] md:h-[380px] bg-transparent">
+          <div className="relative z-20 w-full max-w-[1000px] mx-auto h-[350px] sm:h-[390px] md:h-[380px] px-2 sm:px-4 bg-transparent scale-110 sm:scale-105 md:scale-100 origin-center">
             <Image
               src="/CTA-img2.png"
               alt="Let's Create Together Model"
@@ -136,8 +136,17 @@ export const Cta: React.FC = () => {
           </div>
 
           {/* Start a project CTA Button overlapping bottom of card */}
-          <div className="absolute -bottom-6 sm:-bottom-7 z-30 inset-x-0 flex justify-center">
-            <Button variant="light">Start a project</Button>
+          <div className="absolute -bottom-5 sm:-bottom-7 z-30 inset-x-0 flex justify-center">
+            <div className="md:hidden">
+              <Button variant="light" size="sm">
+                Start a project
+              </Button>
+            </div>
+            <div className="hidden md:block">
+              <Button variant="light">
+                Start a project
+              </Button>
+            </div>
           </div>
         </div>
       </div>
